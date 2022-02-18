@@ -87,7 +87,7 @@ pub struct CheckoutSessionLineItem<'a> {
     pub currency: Currency,
 
     /// The name for the line item.
-    pub name: &'a str,
+    pub name: Option<&'a str>,
 
     /// The quantity of the line item being purchased.
     pub quantity: u64,
