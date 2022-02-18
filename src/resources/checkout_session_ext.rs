@@ -79,7 +79,7 @@ pub struct CreateCheckoutSession<'a> {
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct CheckoutSessionLineItem<'a> {
     /// The amount to be collected per unit of the line item.
-    pub amount: i64,
+    pub amount: Option<i64>,
 
     /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
     ///
@@ -98,8 +98,9 @@ pub struct CheckoutSessionLineItem<'a> {
 
     /// A list of images representing this line item.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub images: Option<Vec<String>>, 
+    pub images: Option<Vec<String>>,
     // TODO: remaining optional fields
+    pub price: Option<crate::PriceId>,
 }
 
 impl CheckoutSession {

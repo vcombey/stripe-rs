@@ -79,6 +79,8 @@ pub use self::event::*;
 // Checkout
 #[cfg(feature = "checkout")]
 mod checkout_session;
+mod item;
+pub use self::item::*;
 #[cfg(feature = "checkout")]
 mod checkout_session_ext;
 #[cfg(feature = "checkout")]
