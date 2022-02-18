@@ -84,7 +84,7 @@ pub struct CheckoutSessionLineItem<'a> {
     /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
     ///
     /// Must be a [supported currency](https://stripe.com/docs/currencies).
-    pub currency: Currency,
+    pub currency: Option<Currency>,
 
     /// The name for the line item.
     pub name: Option<&'a str>,
