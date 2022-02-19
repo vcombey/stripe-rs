@@ -59,7 +59,7 @@ pub struct CreateCheckoutSession<'a> {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub mode: Option<CheckoutSessionMode>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub discounts: Option<Vec<Discount>>,
+    pub discounts: Option<Vec<CheckoutDiscount>>,
 
     // A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in payment mode
     // TODO: payment_intent_data
@@ -81,7 +81,7 @@ pub struct CreateCheckoutSession<'a> {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct Discount {
+pub struct CheckoutDiscount {
     pub coupon: Option<crate::CouponId>,
 }
 
