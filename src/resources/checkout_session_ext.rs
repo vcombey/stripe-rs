@@ -77,7 +77,7 @@ pub struct CreateCheckoutSession<'a> {
     // A subset of parameters to be passed to subscription creation for Checkout Sessions in subscription mode.
     // TODO: subscription_data
     #[serde(skip_serializing_if = "Option::is_none")]
-    subscription_data: Option<SubscriptionData>,
+    pub subscription_data: Option<SubscriptionData>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
