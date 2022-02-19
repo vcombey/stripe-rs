@@ -58,6 +58,8 @@ pub struct CreateCheckoutSession<'a> {
     /// The mode of the Checkout Session, one of `payment`, `setup`, or `subscription`.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub mode: Option<CheckoutSessionMode>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub discounts: Option<Vec<Discount>>,
 
     // A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in payment mode
     // TODO: payment_intent_data
@@ -74,6 +76,33 @@ pub struct CreateCheckoutSession<'a> {
     pub submit_type: Option<CheckoutSessionSubmitType>,
     // A subset of parameters to be passed to subscription creation for Checkout Sessions in subscription mode.
     // TODO: subscription_data
+    #[serde(skip_serializing_if = "Option::is_none")]
+    subscription_data: Option<SubscriptionData>,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct Discount {
+    pub coupon: Option<crate::CouponId>,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct SubscriptionData {
+    // A subset of parameters to be passed to subscription creation for Checkout Sessions in subscription mode.
+    // Hide child parameters
+    // application_fee_percent optional
+    // A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner’s Stripe account. To use an application fee percent, the request must be made on behalf of another account, using the Stripe-Account header or an OAuth key. For more information, see the application fees documentation.
+    // default_tax_rates optional
+    // A list of items, each with an attached plan, that the customer is subscribing to. Prefer using line_items.
+    // Show child parameters
+    // metadata optional dictionary
+    // Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to metadata.
+    // transfer_data optional dictionary
+    // If specified, the funds from the subscription’s invoices will be transferred to the destination and the ID of the resulting transfers will be found on the resulting charges.
+    // trial_end optional
+    // Unix timestamp representing the end of the trial period the customer will get before being charged for the first time. Has to be at least 48 hours in the future.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub trial_period_days: Option<i32>,
+    // Integer representing the number of trial period days before the customer is charged for the first time. Has to be at least 1.
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
