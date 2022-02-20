@@ -78,6 +78,13 @@ pub struct CreateCheckoutSession<'a> {
     // TODO: subscription_data
     #[serde(skip_serializing_if = "Option::is_none")]
     pub subscription_data: Option<SubscriptionData>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub automatic_tax: Option<CheckoutAutomaticTax>,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct CheckoutAutomaticTax {
+    pub enabled: bool,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
