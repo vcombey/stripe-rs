@@ -147,3 +147,23 @@ impl CheckoutSession {
         client.post_form("/checkout/sessions", params)
     }
 }
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct BillingPortal {
+    pub url: Option<String>,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct CreateBillingPortal {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub customer: Option<CustomerId>,
+}
+
+impl BillingPortal {
+    /// Attach a payment method to a customer
+    ///
+    /// For more details see [https://stripe.com/docs/api/payment_methods/attach](https://stripe.com/docs/api/payment_methods/attach).
+    pub fn create(client: &Client, params: CreateBillingPortal) -> Response<BillingPortal> {
+        client.post_form("/billing_portal/sessions", params)
+    }
+}
