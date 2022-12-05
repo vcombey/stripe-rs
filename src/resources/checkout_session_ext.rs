@@ -4,6 +4,7 @@ use crate::resources::{
     CheckoutSession, CheckoutSessionLocale, CheckoutSessionMode, CheckoutSessionSubmitType,
     Currency,
 };
+use crate::Metadata;
 use serde_derive::{Deserialize, Serialize};
 
 /// The parameters for `CheckoutSession::create`
@@ -109,6 +110,9 @@ pub struct SubscriptionData {
     // Unix timestamp representing the end of the trial period the customer will get before being charged for the first time. Has to be at least 48 hours in the future.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub trial_period_days: Option<i32>,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub metadata: Option<Metadata>,
     // Integer representing the number of trial period days before the customer is charged for the first time. Has to be at least 1.
 }
 
